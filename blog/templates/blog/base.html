@@ -6,13 +6,10 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <!--a href="{% url 'post_new' %}" class="top-menu">
-            {% include './icons/plus.svg' %}
-        a-->
+
     </head>
         <body>
             <header class="page-header">
@@ -22,22 +19,25 @@
                         {% include './icons/plus.svg' %}
                     </a>
                     <a href="{% url 'post_draft_list' %}" class="top-menu">
-                        {% include './icons/pencil-fill.svg' %}
+                        {% include './icons/journal-check.svg' %}
                     </a>
-                {% elif user.is_authenticated % }
                     <p class="top-menu">Hello {{ user.username }}
-                        <small>(<a href="{% url 'logout'%}">Log out</a>)</small>
+                        <small class = "top-menu">(<a  href="{% url 'logout'%}">Log out</a>)</small>
                     </p>
 
                 {% else %}
                     <a href="{% url 'login' %}" class="top-menu">
-                        {% include './icons/lock.svg' %}
+                        <button type="submit">Log in</button>
                     </a>
+                    <a href="{% url 'register' %}" class="top-menu">
+                        <button type="submit">Sign in</button>
+                    </a>
+
                 {% endif %}
-                    <h1><a href="/">Mary</a></h1>
+                    <h1 class = "name"><a   href="/">Blog</a></h1>
 
               <div class="container">
-                  <h1><a href="/">Blog</a></h1>
+                  <h2><a class = "top-menu" href="{% url 'about' %}">Maria Raniuk</a></h2>
               </div>
             </header>
             <main class="container">
@@ -48,5 +48,6 @@
                     </div>
                 </div>
             </main>
+        <script src="script.js"></script>
         </body>
 </html>

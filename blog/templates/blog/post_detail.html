@@ -9,7 +9,7 @@
     {% else %}
     <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-default">Publish</a>
     {% endif %}
-    {% if user.is_authenticated %}
+    {% if user.is_superuser %}
     <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">
         <span class="glyphicon glyphicon-pencil"></span>
     </a>
@@ -23,7 +23,7 @@
 <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn btn-default">Add comment</a>
 
 {% for comment in post.comments.all %}
-{% if user.is_authenticated or comment.approved_comment %}
+{% if user.is_superuser or comment.approved_comment %}
 <div class="comment">
     <div class="date">
         {{ comment.created_date }}

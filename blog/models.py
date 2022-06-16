@@ -38,3 +38,26 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
+
+class About(models.Model):
+    name = models.CharField(max_length=50, default='')
+    text = models.TextField()
+
+    def get_first_image(self):
+        item = self.about_images.first()
+        return item.image.url
+
+    def get_images(self):
+        return self.about_images.order_by('id')[1:]
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    date_of_birth = models.DateField(blank=True, null=True)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return 'Profile for user {}'.format(self.user.username)
